@@ -10,15 +10,15 @@ import SwiftUI
 struct PlayerView: View {
     @Binding var count: Int;
     var num: Int;
-    @State var addLives: Int
-    @State var subLives: Int
+    @State var addLives = "5"
+    @State var subLives = "5"
     
     var body: some View {
-
+        
         //            .background(Color.init(red: 0.88, green: 0.62, blue: 0.62))
         //            .background(Color.init(red: 0.71, green: 0.81, blue: 0.54))
         //            .background(Color.init(red: 0.72, green: 0.88, blue: 0.88))
-
+        
         VStack {
             HStack {
                 Text("PLAYER " + String(num))
@@ -27,32 +27,55 @@ struct PlayerView: View {
                 Text(String(count))
             }
             HStack {
+                HStack {
+                    Text("-")
+                    TextField("5", text:$subLives)
+                        .keyboardType(.numberPad)
+                }
+                
                 Button(action: {
-                    count -= 5
+                    count = count - Int(subLives)!
                     
                 }) {
-                    Text("-5")
+                    Text("-" + subLives)
                 }
+                .multilineTextAlignment(.center)
+                
+                
                 Button(action: {
                     count -= 1
                 }) {
                     Text("-")
                 }
+                .multilineTextAlignment(.center)
+                
+                
                 Button(action: {
                     count += 1
                 }) {
                     Text("+")
                 }
+                .multilineTextAlignment(.center)
+                
+                
                 Button(action: {
-                    count += 5
+                    count = count + Int(addLives)!
+                    
                 }) {
-                    Text("+5")
+                    Text("+" + addLives)
+                }
+                .multilineTextAlignment(.center)
+                
+                HStack {
+                    Text("+")
+                    TextField("5", text:$addLives)
+                        .keyboardType(.numberPad)
                 }
             }
         }
         .padding(20)
         .background(Color.init(red: 0.72, green: 0.88, blue: 0.88))
         .cornerRadius(10)
-    
+        
     }
 }

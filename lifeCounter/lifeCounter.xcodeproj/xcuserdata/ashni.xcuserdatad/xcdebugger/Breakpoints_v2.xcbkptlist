@@ -16,40 +16,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
             endingLineNumber = "102"
-            landmarkName = "previews"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "99115710-A6B5-4F2B-894D-50B6B3FB7C84 - 4b9aad1dafc195"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static lifeCounter.ContentView_Previews.previews.getter : some"
-                  moduleName = "lifeCounter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ashni/Desktop/ios-dev/lifecounter/lifeCounter/lifeCounter/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "113">
-               </Location>
-               <Location
-                  uuid = "99115710-A6B5-4F2B-894D-50B6B3FB7C84 - c13b046b5007c7e0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; lifeCounter.ContentView in static lifeCounter.ContentView_Previews.previews.getter : some"
-                  moduleName = "lifeCounter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ashni/Desktop/ios-dev/lifecounter/lifeCounter/lifeCounter/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "103"
-                  endingLineNumber = "103"
-                  offsetFromSymbolStart = "104">
-               </Location>
-            </Locations>
+            landmarkName = "ContentView_Previews"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
