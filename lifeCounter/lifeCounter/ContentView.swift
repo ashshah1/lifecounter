@@ -8,323 +8,94 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var count1: Int = 20
-    @State var count2: Int = 20
-    @State var count3: Int = 20
-    @State var count4: Int = 20
+    @State var lives: [Int] = [20, 20, 20, 20, 20, 20, 20, 20]
+    // @State var history: [String]
+    @State var changes: [String] = []
+    @State var players: Int = 4;
+    @State var playerCount: Int = 3;
     
     @Environment(\.horizontalSizeClass) var sizeClass
-
+    
     @State var orientation = UIDevice.current.orientation
     
     let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
-            .makeConnectable()
-            .autoconnect()
-
+        .makeConnectable()
+        .autoconnect()
+    
     var body: some View {
-        ZStack {
-        Color.init(red: 0.96, green: 0.96, blue: 0.96)
-        .ignoresSafeArea()
-            VStack(spacing: 25) {
-            Group {
-                if (!orientation.isLandscape) {
-        
-            VStack {
-                HStack {
-                    Text("PLAYER 1")
-                        .foregroundColor(Color.white)
-                        .font(.headline)
-                    Text(String(count1))
-                }
-                HStack {
+        NavigationView {
+            ZStack {
+                Color.init(red: 0.96, green: 0.96, blue: 0.96)
+                    .ignoresSafeArea()
+                ScrollView {
+                VStack(spacing: 25) {
                     Button(action: {
-                        self.count1 -= 5
-                        if (self.count1 < 0) {
-                            
-                        }
-                        
+                        playerCount += 1
                     }) {
-                        Text("-5")
+                    Text("Add Player")
                     }
-                    Button(action: {
-                        self.count1 -= 1
-                    }) {
-                        Text("-")
-                    }
-                    Button(action: {
-                        self.count1 += 1
-                    }) {
-                        Text("+")
-                    }
-                    Button(action: {
-                        self.count1 += 5
-                    }) {
-                        Text("+5")
-                    }
-                }
-            }
-            .padding(20)
-            .background(Color.init(red: 0.88, green: 0.62, blue: 0.62))
-            .cornerRadius(10)
-            VStack {
-                HStack {
-                    Text("PLAYER 2")
-                        .foregroundColor(Color.white)
-                        .font(.headline)
-                    Text(String(count2))
-                }
-                HStack {
-                    Button(action: {
-                        self.count2 -= 5
-                    }) {
-                        Text("-5")
-                    }
-                    Button(action: {
-                        self.count2 -= 1
-                    }) {
-                        Text("-")
-                    }
-                    Button(action: {
-                        self.count2 += 5
-                    }) {
-                        Text("+")
-                    }
-                    Button(action: {
-                        self.count2 += 5
-                    }) {
-                        Text("+5")
-                    }
-                }
-            }
-            .padding(20)
-            .background(Color.init(red: 0.71, green: 0.81, blue: 0.54))
-            .cornerRadius(10)
-            
-            VStack {
-                HStack {
-                    Text("PLAYER 3")
-                        .foregroundColor(Color.white)
-                        .font(.headline)
-                    Text(String(count3))
-                }
-                HStack {
-                    Button(action: {
-                        self.count3 -= 5
-                    }) {
-                        Text("-5")
-                    }
-                    Button(action: {
-                        self.count3 -= 1
-                    }) {
-                        Text("-")
-                    }
-                    Button(action: {
-                        self.count3 += 1
-                    }) {
-                        Text("+")
-                    }
-                    Button(action: {
-                        self.count3 += 5
-                    }) {
-                        Text("+5")
-                    }
-                }
-            }
-            .padding(20)
-            .background(Color.init(red: 0.89, green: 0.85, blue: 0.53))
-            .cornerRadius(10)
-            VStack {
-                HStack {
-                    Text("PlAYER 4")
-                        .foregroundColor(Color.white)
-                        .font(.headline)
-                    Text(String(count4))
-                }
-                HStack {
-                    Button(action: {
-                        self.count4 -= 5
-                    }) {
-                        Text("-5")
-                    }
-                    Button(action: {
-                        self.count4 -= 1
-                    }) {
-                        Text("-")
-                    }
-                    Button(action: {
-                        self.count4 += 1
-                    }) {
-                        Text("+")
-                    }
-                    Button(action: {
-                        self.count4 += 5
-                    }) {
-                        Text("+5")
-                    }
-                }
-            }
-            .padding(20)
-            .background(Color.init(red: 0.72, green: 0.88, blue: 0.88))
-            .cornerRadius(10)
-        
-            } else {
-                HStack {
-                    VStack {
+                    .disabled(playerCount == 8 || changes.count > 0)
+                    // Group {
+                        // if (!orientation.isLandscape) {
+                            ForEach(0..<playerCount, id: \.self) { curr in
+                                PlayerView(count: self.$lives[curr], num: (curr + 1))
+                            }
+//                            PlayerView(count: self.$lives[0], num: 1)
+//                            PlayerView(count: self.$lives[1], num: 2)
+//                            PlayerView(count: self.$lives[2], num: 3)
+//                            PlayerView(count: self.$lives[3], num: 4)
+                        //} else {
+//                            HStack {
+//                                VStack {
+//                                    PlayerView(count: self.$lives[0], num: 1)
+//                                    PlayerView(count: self.$lives[1], num: 2)
+//                                }
+//                                VStack {
+//                                    PlayerView(count: self.$lives[2], num: 3)
+//                                    PlayerView(count: self.$lives[3], num: 4)
+//                                }
+//                            }
+                        // }
                         VStack {
-                            HStack {
-                                Text("Player 1")
-                                    .foregroundColor(Color.white)
-                                    .font(.headline)
-                                Text(String(count1))
-                            }
-                            HStack {
-                                Button(action: {
-                                    self.count1 -= 5
-                                    if (self.count1 < 0) {
-                                        
-                                    }
-                                    
-                                }) {
-                                    Text("-5")
-                                }
-                                Button(action: {
-                                    self.count1 -= 1
-                                }) {
-                                    Text("-")
-                                }
-                                Button(action: {
-                                    self.count1 += 1
-                                }) {
-                                    Text("+")
-                                }
-                                Button(action: {
-                                    self.count1 += 5
-                                }) {
-                                    Text("+5")
+                            ForEach(0..<lives.count, id: \.self) { n in
+                                if (lives[n] <= 0) {
+                                    Text("Player " + String(n + 1) + " LOSES!")
                                 }
                             }
                         }
-                        .padding(30)
-                        .background(Color.init(red: 0.88, green: 0.62, blue: 0.62))
-                        .cornerRadius(10)
-                        VStack {
-                            HStack {
-                                Text("Player 2")
-                                    .foregroundColor(Color.white)
-                                    .font(.headline)
-                                Text(String(count2))
-                            }
-                            HStack {
-                                Button(action: {
-                                    self.count2 -= 5
-                                }) {
-                                    Text("-5")
-                                }
-                                Button(action: {
-                                    self.count2 -= 1
-                                }) {
-                                    Text("-")
-                                }
-                                Button(action: {
-                                    self.count2 += 5
-                                }) {
-                                    Text("+")
-                                }
-                                Button(action: {
-                                    self.count2 += 5
-                                }) {
-                                    Text("+5")
+//                        .onReceive(orientationChanged) { _ in
+//                            self.orientation = UIDevice.current.orientation
+//                        }ScrollView {
+                        .onChange(of: lives) { [lives] newCount in
+                            for i in 0..<players {
+                                if (lives[i] != newCount[i]) {
+                                    let update = lives[i] < newCount [i] ? " gained " : " lost "
+                                    changes.append("Player " + String(i + 1) + update + String(abs(newCount[i] - lives[i])) + " lives")
                                 }
                             }
                         }
-                        .padding(30)
-                        .background(Color.init(red: 0.71, green: 0.81, blue: 0.54))
-                        .cornerRadius(10)
-                    }
-                    VStack {
-                        VStack {
-                            HStack {
-                                Text("Player 3")
-                                    .foregroundColor(Color.white)
-                                    .font(.headline)
-                                Text(String(count3))
-                            }
-                            HStack {
-                                Button(action: {
-                                    self.count3 -= 5
-                                }) {
-                                    Text("-5")
-                                }
-                                Button(action: {
-                                    self.count3 -= 1
-                                }) {
-                                    Text("-")
-                                }
-                                Button(action: {
-                                    self.count3 += 1
-                                }) {
-                                    Text("+")
-                                }
-                                Button(action: {
-                                    self.count3 += 5
-                                }) {
-                                    Text("+5")
-                                }
-                            }
-                        }
-                        .padding(30)
-                        .background(Color.init(red: 0.89, green: 0.85, blue: 0.53))
-                        .cornerRadius(10)
-                        VStack {
-                            HStack {
-                                Text("Player 4")
-                                    .foregroundColor(Color.white)
-                                    .font(.headline)
-                                Text(String(count4))
-                            }
-                            HStack {
-                                Button(action: {
-                                    self.count4 -= 5
-                                }) {
-                                    Text("-5")
-                                }
-                                Button(action: {
-                                    self.count4 -= 1
-                                }) {
-                                    Text("-")
-                                }
-                                Button(action: {
-                                    self.count4 += 1
-                                }) {
-                                    Text("+")
-                                }
-                                Button(action: {
-                                    self.count4 += 5
-                                }) {
-                                    Text("+5")
-                                }
-                            }
-                        }
-                        .padding(30)
-                        .background(Color.init(red: 0.72, green: 0.88, blue: 0.88))
-                        .cornerRadius(10)
+                    // }
+                    NavigationLink(destination:
+                        HistoryView(list: changes)) {
+                        Text("History")
                     }
                 }
             }
-            VStack {
-                let allLives: [Int] = [self.count1, self.count2, self.count3, self.count4]
-                ForEach(0..<allLives.count) { n in
-                    if (allLives[n] <= 0) {
-                        Text("Player " + String(n + 1) + " LOSES!")
-                    }
-                }
             }
-            .onReceive(orientationChanged) { _ in
-                        self.orientation = UIDevice.current.orientation
-                    }
-        }
         }
     }
+}
+
+struct HistoryView: View {
+    var list: [String]
+    
+    var body: some View {
+        ScrollView {
+            ForEach(list, id:\.self) { change in
+                Text(change)
+                    .padding()
+            }
+        }
     }
 }
 
